@@ -1,5 +1,7 @@
 @author : Fahad Jadiya
+
 @email  : fahadjdy12@gmail.com
+
 @phone  : 7203070468
 
 # 🚀 Laravel with Inertia.js & Vue 3 Setup Guide 

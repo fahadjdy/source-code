@@ -1,4 +1,4 @@
-# 🚀 Laravel with Inertia.js & Vue 3 Setup Guide 
+# 🚀 Laravel 12 with Inertia.js & Vue 3 Setup Guide 
 
 This guide walks you through setting up a new Laravel project with Inertia.js and Vue 3.
 

@@ -2,9 +2,11 @@
 
 ## 1. Create a New Laravel Project
 
+
 laravel new
 set default starter kit
 php artisan serve
+
 
 ---
 

@@ -1,9 +1,3 @@
-@author : Fahad Jadiya
-
-@email  : fahadjdy12@gmail.com
-
-@phone  : 7203070468
-
 # 🚀 Laravel with Inertia.js & Vue 3 Setup Guide 
 
 This guide walks you through setting up a new Laravel project with Inertia.js and Vue 3.

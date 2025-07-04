@@ -9,9 +9,9 @@ import { Link } from '@inertiajs/vue3'
         <Link
           href="/"
           class="block text-red-900 text-center px-4 py-3 no-underline hover:bg-red-200"
-          :class="{ 'bg-green-600 text-white': $page.url === '/?page=1' }"
+          :class="{ 'bg-green-600 text-white': $page.url === '/' }"
         >
-          Home
+          Home 
         </Link>
       </li>
       <li>

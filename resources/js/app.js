@@ -1,20 +1,42 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
-import BaseLayout from './Layouts/BaseLayout.vue'
+import BaseLayout from './Layouts/User/BaseLayout.vue'
+import AdminLayout from './Layouts/Admin/BaseLayout.vue'
+// import { ZiggyVue } from 'ziggy-js'
 import { ZiggyVue } from 'ziggy-js'
+import { Ziggy } from './ziggy'
+
+// Font Awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+
+// Add icons to library
+library.add(faEnvelope, faLock)
 
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-    let page = pages[`./Pages/${name}.vue`]
-    // If the page doesn't have a layout, set the default layout
-    page.default.layout = page.default.layout || BaseLayout
+    const page = pages[`./Pages/${name}.vue`]
+    const noLayoutPages = ['Auth/Login', 'Auth/Register']
+
+    if (name.startsWith('Admin/')) {
+      page.default.layout = AdminLayout
+    } else if (!noLayoutPages.includes(name)) {
+      page.default.layout = page.default.layout || BaseLayout
+    }
+
     return page
   },
+
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .use(ZiggyVue) 
-      .mount(el)
-  },
+    const app = createApp({ render: () => h(App, props) })
+
+    app.use(plugin)
+    // app.use(ZiggyVue)
+    app.use(Ziggy, ZiggyVue)
+    app.component('font-awesome-icon', FontAwesomeIcon)
+
+    app.mount(el)
+  }
 })

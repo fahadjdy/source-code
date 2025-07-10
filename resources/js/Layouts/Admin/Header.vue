@@ -1,6 +1,7 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3'
 import { route } from 'ziggy-js'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 const page = usePage()
 
 const logout = () => {
@@ -33,7 +34,8 @@ const logout = () => {
 
     <div class="flex items-center space-x-4">
       <div v-if="page.props.auth.user">
-        Logged in as {{ page.props.auth.user.name }}
+            <font-awesome-icon :icon="['fas', 'user']" class="mr-2" /> 
+         {{ page.props.auth.user.name }}
       </div>
       <button
         @click="logout"

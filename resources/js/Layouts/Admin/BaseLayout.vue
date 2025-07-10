@@ -1,10 +1,13 @@
 <template>
-  <div>
+  <div class="min-h-screen flex flex-col">
     <HeaderComponent />
-    <main>
+
+    <main class="flex-grow p-4">
       <slot />
     </main>
+
     <FooterComponent />
+
   </div>
 </template>
 

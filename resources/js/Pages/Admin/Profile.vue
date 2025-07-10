@@ -1,3 +1,3 @@
 <template>
-    Profile Admin
+        Profile Admin
 </template>

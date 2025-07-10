@@ -9,10 +9,10 @@ import { Ziggy } from './ziggy'
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock ,faUser } from '@fortawesome/free-solid-svg-icons'
 
 // Add icons to library
-library.add(faEnvelope, faLock)
+library.add(faEnvelope, faLock,faUser)
 
 createInertiaApp({
   resolve: name => {
@@ -33,7 +33,6 @@ createInertiaApp({
     const app = createApp({ render: () => h(App, props) })
 
     app.use(plugin)
-    // app.use(ZiggyVue)
     app.use(Ziggy, ZiggyVue)
     app.component('font-awesome-icon', FontAwesomeIcon)
 

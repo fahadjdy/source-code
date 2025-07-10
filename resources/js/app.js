@@ -2,17 +2,15 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import BaseLayout from './Layouts/User/BaseLayout.vue'
 import AdminLayout from './Layouts/Admin/BaseLayout.vue'
-// import { ZiggyVue } from 'ziggy-js'
 import { ZiggyVue } from 'ziggy-js'
-import { Ziggy } from './ziggy'
 
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faEnvelope, faLock ,faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock ,faUser , faHome} from '@fortawesome/free-solid-svg-icons'
 
 // Add icons to library
-library.add(faEnvelope, faLock,faUser)
+library.add(faEnvelope, faLock,faUser,faHome)
 
 createInertiaApp({
   resolve: name => {
@@ -33,7 +31,7 @@ createInertiaApp({
     const app = createApp({ render: () => h(App, props) })
 
     app.use(plugin)
-    app.use(Ziggy, ZiggyVue)
+    app.use(ZiggyVue)
     app.component('font-awesome-icon', FontAwesomeIcon)
 
     app.mount(el)

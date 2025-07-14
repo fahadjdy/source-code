@@ -1,17 +1,28 @@
 <!-- src/Components/Breadcrumb.vue -->
 <template>
-  <nav aria-label="breadcrumb" class="mb-2">     
-    <ol class="flex space-x-2 text-sm text-gray-700 breadcrumb items-center">
-      <font-awesome-icon :icon="['fas', 'home']" class="mr-2 align-cenetr" /> 
-      <li v-for="(item, index) in items" :key="index" class="breadcrumb-item">
-        <a v-if="item.url" :href="item.url">{{ item.label }}</a>
-        <span v-else>{{ item.label }}</span>
-      </li>
-    </ol>
-  </nav>
+    <!-- [ breadcrumb ] start -->
+      <div class="page-header">
+        <div class="page-block">
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <div class="page-header-title">
+                <h5 v-if="!items[items.length-1].url" class="m-b-10">{{ items[items.length-1].label }}</h5>
+              </div>
+              <ul class="flex space-x-2 text-sm text-gray-700 breadcrumb items-center">
+                <li v-for="(item, index) in items" :key="index" class="breadcrumb-item">
+                  <Link v-if="item.url" :href="item.url">{{ item.label }}</Link>
+                  <span v-else>{{ item.label }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ breadcrumb ] end -->
 </template>
 
 <script setup>
+  import { Link } from '@inertiajs/vue3'
     const props = defineProps({
     items: {
         type: Array,
@@ -19,16 +30,3 @@
     }
     })
 </script>
-
-<style scoped>
-    .breadcrumb {
-      display: flex;
-      list-style: none;
-      padding: 0;
-    }
-
-    .breadcrumb-item + .breadcrumb-item::before  {
-      content: '>';
-      margin-right: 8px;
-    }
-</style>

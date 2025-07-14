@@ -1,5 +1,21 @@
 <template>
-  <footer class="flex justify-end mr-2 mb-2">
-    <p>© 2025 My Website. All rights reserved. Admin Footer</p>
-  </footer>
+  <!-- [ Main Content ] end -->
+  <footer class="pc-footer">
+    <div class="footer-wrapper container-fluid">
+      <div class="row">
+        <div class="col-sm my-1">
+          <p class="m-0">Mantis &#9829; crafted by Team <a href="https://themeforest.net/user/codedthemes"
+              target="_blank">Codedthemes</a></p>
+        </div>
+        <div class="col-sm my-1">
+          <p class="m-0">Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
+        </div>
+        <div class="col-auto my-1">
+          <ul class="list-inline footer-link mb-0">
+            <li class="list-inline-item"><a href="../index.html">Home</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer> <!-- Required Js -->
 </template>

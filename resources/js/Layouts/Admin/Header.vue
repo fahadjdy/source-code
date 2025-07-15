@@ -13,17 +13,44 @@ const logout = () => {
 
 
 // import { slideToggle} from './helpers/sidebar';
-function toggleSideBar() {
+function sidebarHide() {
   const sidebar = document.querySelector('.pc-sidebar')
   if (!sidebar) return
   sidebar.classList.toggle('pc-sidebar-hide')
-  
+}
+function rm_menu() {
+  var temp_list = document.querySelector('.pc-sidebar');
+  if (temp_list) {
+    document.querySelector('.pc-sidebar').classList.remove('mob-sidebar-active');
+  }
+  if (document.querySelector('.topbar')) {
+    document.querySelector('.topbar').classList.remove('mob-sidebar-active');
+  }
+
+  document.querySelector('.pc-sidebar .pc-menu-overlay').remove();
+  if(document.querySelector('.topbar .pc-menu-overlay')){
+    document.querySelector('.topbar .pc-menu-overlay').remove();
+  }
+}
+
+function mobileCollapse() {
+  var temp_sidebar = document.querySelector('.pc-sidebar');
+  if (temp_sidebar) {
+    if (document.querySelector('.pc-sidebar').classList.contains('mob-sidebar-active')) {
+      rm_menu();
+    } else {
+      document.querySelector('.pc-sidebar').classList.add('mob-sidebar-active');
+      document.querySelector('.pc-sidebar').insertAdjacentHTML('beforeend', '<div class="pc-menu-overlay"></div>');
+      document.querySelector('.pc-menu-overlay').addEventListener('click', function () {
+        rm_menu();
+      });
+    }
+  }
 }
 
 onMounted(() => {
-  toggleSideBar();  
-
-
+  sidebarHide();
+  mobileCollapse();
 })
 </script>
 
@@ -34,15 +61,15 @@ onMounted(() => {
         <ul class="list-unstyled">
           <!-- ======= Menu collapse Icon ===== -->
           <li class="pc-h-item pc-sidebar-collapse">
-              <button type="button" class="pc-head-link ms-0" id="sidebar-hide" @click="toggleSideBar">
+            <button type="button" class="pc-head-link ms-0" id="sidebar-hide" @click="sidebarHide">
               <i class="ti ti-menu-2"></i>
             </button>
 
           </li>
           <li class="pc-h-item pc-sidebar-popup">
-            <a href="#" class="pc-head-link ms-0" id="mobile-collapse">
+            <button type="button" class="pc-head-link ms-0" id="mobile-collapse" @click="mobileCollapse">
               <i class="ti ti-menu-2"></i>
-            </a>
+            </button>
           </li>
           <li class="dropdown pc-h-item d-inline-flex d-md-none">
             <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#" role="button"
@@ -86,7 +113,8 @@ onMounted(() => {
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../../../../public/assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
+                        <img src="../../../../public/assets/images/user/avatar-2.jpg" alt="user-image"
+                          class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">3:00 AM</span>
@@ -98,7 +126,8 @@ onMounted(() => {
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../../../../public/assets/images/user/avatar-1.jpg" alt="user-image" class="user-avtar">
+                        <img src="../../../../public/assets/images/user/avatar-1.jpg" alt="user-image"
+                          class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">6:00 PM</span>
@@ -110,7 +139,8 @@ onMounted(() => {
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../../../../public/assets/images/user/avatar-3.jpg" alt="user-image" class="user-avtar">
+                        <img src="../../../../public/assets/images/user/avatar-3.jpg" alt="user-image"
+                          class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">2:45 PM</span>
@@ -122,7 +152,8 @@ onMounted(() => {
                   <a class="list-group-item list-group-item-action">
                     <div class="d-flex">
                       <div class="flex-shrink-0">
-                        <img src="../../../../public/assets/images/user/avatar-4.jpg" alt="user-image" class="user-avtar">
+                        <img src="../../../../public/assets/images/user/avatar-4.jpg" alt="user-image"
+                          class="user-avtar">
                       </div>
                       <div class="flex-grow-1 ms-1">
                         <span class="float-end text-muted">9:10 PM</span>
@@ -149,7 +180,8 @@ onMounted(() => {
               <div class="dropdown-header">
                 <div class="d-flex mb-1">
                   <div class="flex-shrink-0">
-                    <img src="../../../../public/assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar wid-35">
+                    <img src="../../../../public/assets/images/user/avatar-2.jpg" alt="user-image"
+                      class="user-avtar wid-35">
                   </div>
                   <div class="flex-grow-1 ms-3">
                     <h6 class="mb-1">Stebin Ben</h6>

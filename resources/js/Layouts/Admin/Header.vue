@@ -1,5 +1,7 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3'
+import { onMounted } from 'vue'
+
 import { route } from 'ziggy-js'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 const page = usePage()
@@ -7,6 +9,22 @@ const page = usePage()
 const logout = () => {
   router.post('/logout')
 }
+
+
+
+// import { slideToggle} from './helpers/sidebar';
+function toggleSideBar() {
+  const sidebar = document.querySelector('.pc-sidebar')
+  if (!sidebar) return
+  sidebar.classList.toggle('pc-sidebar-hide')
+  
+}
+
+onMounted(() => {
+  toggleSideBar();  
+
+
+})
 </script>
 
 <template>
@@ -16,9 +34,10 @@ const logout = () => {
         <ul class="list-unstyled">
           <!-- ======= Menu collapse Icon ===== -->
           <li class="pc-h-item pc-sidebar-collapse">
-            <a href="#" class="pc-head-link ms-0" id="sidebar-hide">
+              <button type="button" class="pc-head-link ms-0" id="sidebar-hide" @click="toggleSideBar">
               <i class="ti ti-menu-2"></i>
-            </a>
+            </button>
+
           </li>
           <li class="pc-h-item pc-sidebar-popup">
             <a href="#" class="pc-head-link ms-0" id="mobile-collapse">

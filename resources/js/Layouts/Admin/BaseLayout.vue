@@ -39,35 +39,17 @@
 
 </template>
 <script setup>
-import { onMounted } from 'vue'
 import { Head } from '@inertiajs/vue3'
 import HeaderComponent from './Header.vue'
 import NavbarComponent from './Navbar.vue'
 import FooterComponent from './Footer.vue'
-
-// Import global JS files
-import '../../../../public/assets/js/plugins/popper.min.js'
-import '../../../../public/assets/js/plugins/simplebar.min.js'
-import '../../../../public/assets/js/plugins/bootstrap.min.js'
-import '../../../../public/assets/js/fonts/custom-font.js'
-import '../../../../public/assets/js/plugins/feather.min.js'
-
-onMounted(async () => {
-  await import('../../../../public/assets/js/pcoded.js')
-  window.layout_change('light')
-  window.change_box_container('false')
-  window.layout_rtl_change('false')
-  window.preset_change("preset-1")
-  window.font_change("Public-Sans")
+import { onMounted } from 'vue'
 
 
-  const sidebar_hide = document.querySelector('#sidebar-hide');
-  const sidebar = document.querySelector('.pc-sidebar');
-  if (sidebar_hide && sidebar) {
-    sidebar_hide.addEventListener('click', () => {
-      sidebar.classList.toggle('pc-sidebar-hide');
-    });
-  }
+
+onMounted(() => {
+
   
 })
+
 </script>

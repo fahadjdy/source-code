@@ -58,6 +58,10 @@ function mobileCollapse() {
   }
 }
 
+function viewMainSite(){
+  window.open(location.origin, '_blank');
+}
+
 onMounted(() => {
   sidebarHide();
   mobileCollapse();
@@ -94,11 +98,15 @@ onBeforeUnmount(() => {
       <!-- [Mobile Media Block end] -->
       <div class="ms-auto">
         <ul class="list-unstyled">
+          <li @click="viewMainSite" class="pc-h-item mr-2 flex items-center cursor-pointer transition-all duration-200 hover:text-primary-600 hover:bg-gray-100 px-3 rounded-md">
+            <i class="ti ti-world text-3xl mr-1"></i>
+            View Site
+          </li>
           <li class="dropdown pc-h-item header-user-profile">
             <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
               aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
               <img src="../../../../public/assets/images/user/avatar-2.jpg" alt="user-image" class="user-avtar">
-              <span>Stebin Ben</span>
+              <span v-text="usePage().props.auth.user.name"></span>
             </a>
             <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
               <div class="dropdown-header">
@@ -108,8 +116,8 @@ onBeforeUnmount(() => {
                       class="user-avtar wid-35">
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h6 class="mb-1">Stebin Ben</h6>
-                    <span>UI/UX Designer</span>
+                    <h6 class="mb-1" v-text="usePage().props.auth.user.name"></h6>
+                    <span v-text="usePage().props.auth.user.email"></span>
                   </div>
                   <a  @click.prevent="logout" class="pc-head-link bg-transparent"><i class="ti ti-power text-danger"></i></a>
                 </div>

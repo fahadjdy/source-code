@@ -1,6 +1,6 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3'
-import { onMounted } from 'vue'
+import { onMounted , onBeforeUnmount } from 'vue'
 
 import { route } from 'ziggy-js'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
@@ -30,6 +30,19 @@ function rm_menu() {
 }
 
 
+function cleanupSidebarOnResize() {
+  const sidebar = document.querySelector('.pc-sidebar');
+  const topbar = document.querySelector('.topbar');
+
+  if (window.innerWidth >= 992) { // desktop breakpoint
+    sidebar?.classList.remove('mob-sidebar-active');
+    topbar?.classList.remove('mob-sidebar-active');
+
+    sidebar?.querySelector('.pc-menu-overlay')?.remove();
+    topbar?.querySelector('.pc-menu-overlay')?.remove();
+  }
+}
+
 function mobileCollapse() {
   var temp_sidebar = document.querySelector('.pc-sidebar');
   if (temp_sidebar) {
@@ -48,6 +61,14 @@ function mobileCollapse() {
 onMounted(() => {
   sidebarHide();
   mobileCollapse();
+  
+  cleanupSidebarOnResize(); // check once on page load
+  window.addEventListener('resize', cleanupSidebarOnResize);
+
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', cleanupSidebarOnResize);
 })
 </script>
 

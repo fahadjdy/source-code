@@ -4,6 +4,12 @@ import BaseLayout from './Layouts/User/BaseLayout.vue'
 import AdminLayout from './Layouts/Admin/BaseLayout.vue'
 import { ZiggyVue } from 'ziggy-js'
 
+
+// Import Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap'
+
+
 // Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

@@ -80,8 +80,9 @@
 </template>
 
 <script setup>
-import { Link , router } from '@inertiajs/vue3'
-import { onMounted } from 'vue'
+import { Link , router ,usePage } from '@inertiajs/vue3'
+import { onMounted, watch } from 'vue'
+import { route } from 'ziggy-js'
 
 function menu_click() {
   const url = window.location.href.split(/[?#]/)[0];
@@ -161,14 +162,13 @@ function subMenu(event) {
   }
 }
 
+watch(() => usePage().url, () => {
+    console.log("mounted", usePage());
+    menu_click();
+})
 
 onMounted(() => {
-    menu_click();
-     
-    router.on('navigate', () => {
-        setTimeout(() => {
-            menu_click();
-        }, 0);
-    });
+
+   
 })
 </script>

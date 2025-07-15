@@ -164,11 +164,10 @@ function subMenu(event) {
 
 watch(() => usePage().url, () => {
     console.log("mounted", usePage());
-    menu_click();
+    menu_click(); // on change url menu should selected
 })
 
 onMounted(() => {
-
-   
+  menu_click(); // on load menu should selected 
 })
 </script>

@@ -84,6 +84,7 @@ import { Link , router ,usePage } from '@inertiajs/vue3'
 import { onMounted, watch } from 'vue'
 import { route } from 'ziggy-js'
 
+
 function menu_click() {
   const url = window.location.href.split(/[?#]/)[0];
   const sidebar = document.querySelector('.pc-sidebar');

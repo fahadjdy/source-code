@@ -44,6 +44,7 @@ function cleanupSidebarOnResize() {
 }
 
 function mobileCollapse() {
+
   var temp_sidebar = document.querySelector('.pc-sidebar');
   if (temp_sidebar) {
     if (document.querySelector('.pc-sidebar').classList.contains('mob-sidebar-active')) {
@@ -63,8 +64,6 @@ function viewMainSite(){
 }
 
 onMounted(() => {
-  sidebarHide();
-  mobileCollapse();
   
   cleanupSidebarOnResize(); // check once on page load
   window.addEventListener('resize', cleanupSidebarOnResize);

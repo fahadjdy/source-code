@@ -1,17 +1,3 @@
-<script setup>
-  import { reactive } from 'vue'
-  import { router } from '@inertiajs/vue3'
-
-  const form = reactive({
-    email: '',
-    password: '',
-  })
-
-  const submit = () => {
-    router.post('/login', form)
-  }
-</script>
-
 <template>
   <div class="min-h-screen flex items-center justify-center bg-gray-100">
     <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-8">

@@ -20,5 +20,6 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('profile', [Admin::class, 'profile'])->name('admin.profile');
+    Route::post('profile/{id}', [Admin::class, 'updateProfile'])->name('admin.profile.update');
     Route::get('dashboard', [Admin::class, 'dashboard'])->name('admin.dashboard');
 });

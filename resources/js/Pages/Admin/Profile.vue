@@ -1,3 +1,83 @@
+<script setup>
+import { useForm ,usePage } from '@inertiajs/vue3'
+import * as yup from 'yup'
+import Breadcrumb from '@/Components/Breadcrumb.vue'
+import { ref ,computed , defineProps } from 'vue'
+
+const page = usePage()
+const successMessage = computed(() => page.props.flash?.success)
+
+const breadcrumb = [
+  { label: 'Dashboard', url: '/admin/dashboard' },
+  { label: 'Profile' }
+]
+
+// Define schema (optional but useful for validation)
+const schema = yup.object({
+  name: yup.string().required(),
+  slogan: yup.string(),
+  address: yup.string(),
+  contacts: yup.array().of(yup.string()),
+  socials: yup.array().of(
+    yup.object({
+      name: yup.string(),
+      url: yup.string().url(),
+      iconPreview: yup.string()
+    })
+  )
+})
+
+
+const profile = defineProps({
+  profile: Object
+})
+
+console.log("My Profile "+ profile)
+const form = useForm({
+ name: profile.profile.name || '',
+  slogan: profile.profile.slogan || '',
+  address: profile.profile.address || '',
+  contacts: profile.profile.contacts || [''],
+  socials: profile.profile.socials || [{ name: '', url: '', iconPreview: '' }]
+})
+
+// Your existing preview and add handlers still work
+const logoPreview = ref(null)
+const faviconPreview = ref(null)
+
+function previewLogo(event) {
+  const file = event.target.files[0]
+  if (file) logoPreview.value = URL.createObjectURL(file)
+}
+
+function previewFavicon(event) {
+  const file = event.target.files[0]
+  if (file) faviconPreview.value = URL.createObjectURL(file)
+}
+
+function previewSocialIcon(event, index) {
+  const file = event.target.files[0]
+  if (file) form.socials[index].iconPreview = URL.createObjectURL(file)
+}
+
+function addContact() {
+  form.contacts.push('')
+}
+
+function addSocial() {
+  form.socials.push({ name: '', url: '', iconPreview: '' })
+}
+
+function submitForm() {
+  form.post('profile/1', {
+    preserveScroll: true,
+    onSuccess: (res) => {
+      // alert('Profile updated successfully!')
+      console.log(res)
+    }
+  })
+}
+</script>
 <!-- src/Pages/Admin/Profile.vue -->
 <template>
   <Breadcrumb :items="breadcrumb" />
@@ -60,7 +140,7 @@
           <h5 class="mb-0"><i class="fa fa-globe"></i> &nbsp; Social Media</h5>
           <button type="button" class="btn btn-sm btn-outline-success" @click="addSocial">+ Add Social</button>
         </div>
-        <div class="card-">
+        <div class="card-body">
           <div class="row" v-for="(social, index) in form.socials" :key="index">
             <div class="col-4 mb-2 mt-2">
               <label :for="'social-name-' + index" class="form-label">Platform Name</label>
@@ -77,7 +157,6 @@
               <img :src="social.iconPreview" alt="Icon Preview" v-if="social.iconPreview" class="img-thumbnail mt-2"
                 style="max-height: 50px;">
             </div>
-            <hr />
           </div>
         </div>
       </div>
@@ -85,61 +164,9 @@
       <div class="text-end">
         <button type="submit" class="btn btn-primary">Save Changes</button>
       </div>
+       <div v-if="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
     </div>
   </form>
 </template>
-
-<script setup>
-  import Breadcrumb from '@/Components/Breadcrumb.vue'
-  import { reactive, ref } from 'vue'
-
-  const breadcrumb = [
-    { label: 'Dashboard', url: '/admin/dashboard' },
-    { label: 'Profile' }
-  ]
-
-
-  const form = reactive({
-    name: '',
-    slogan: '',
-    address: '',
-    contacts: [''],
-    socials: [{ name: '', url: '', iconPreview: '' }]
-  })
-
-  const logoPreview = ref(null)
-  const faviconPreview = ref(null)
-
-  function previewLogo(event) {
-    const file = event.target.files[0]
-    if (file) {
-      logoPreview.value = URL.createObjectURL(file)
-    }
-  }
-
-  function previewFavicon(event) {
-    const file = event.target.files[0]
-    if (file) {
-      faviconPreview.value = URL.createObjectURL(file)
-    }
-  }
-
-  function previewSocialIcon(event, index) {
-    const file = event.target.files[0]
-    if (file) {
-      form.socials[index].iconPreview = URL.createObjectURL(file)
-    }
-  }
-
-  function addContact() {
-    form.contacts.push('')
-  }
-
-  function addSocial() {
-    form.socials.push({ name: '', url: '', iconPreview: '' })
-  }
-
-  function submitForm() {
-    console.log(form)
-  }
-</script>
